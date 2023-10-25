@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <title>exam</title>
+</head>
+<body>
+<div class="container my-3">
+    <h1 class="bg-info text-center p-3">logo</h1>
+    <div class="d-flex">
+        <div class="bg-warning text-center p-3">
+            <ul>
+                <li th:each="article : ${articleList}">
+                    <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+                </li>
+            </ul>
+            <a th:href="@{/article/create}" class="btn btn-primary">추가</a>
+        </div>
+        <div>
+            <form class="text-center ms-3" th:if="${articleDetail != null}"
+                  th:action="@{|/article/modify/${articleDetail.id}|}" method="post">
+                <label for="subject" class="form-label">제목</label>
+                <input type="text" id="subject" name="subject" class="form-control" th:value="${articleDetail.subject}">
+                <label for="content" class="form-label">내용</label>
+                <textarea name="content" id="content" rows="20" cols="50" class="form-control" th:text="${articleDetail.content}"></textarea>
+                <button type="submit" class="btn btn-primary my-2">수정</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
